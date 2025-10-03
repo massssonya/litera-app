@@ -22,3 +22,9 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# My components
+
+Input.vue
+InputForm.vue
+PasswordInput.vue

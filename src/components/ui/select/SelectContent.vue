@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import clsx from 'clsx';
-
+import { useSelect } from './useSelect';
 
 interface Props {
   class?: string;
@@ -8,10 +8,12 @@ interface Props {
 
 const props = defineProps<Props>()
 
+const {isOpenSelect} = useSelect()
+
 </script>
 
 <template>
-    <div :class="clsx('select-content', props.class)">
+    <div v-if="isOpenSelect" :class="clsx('select-content', props.class)">
       <slot></slot>
     </div>
 </template>
@@ -24,7 +26,7 @@ const props = defineProps<Props>()
   box-shadow: 5px 5px 10px 2px rgba(0, 0, 0, 0.3);
   bottom: 0;
   transform: translateY(100%);
-  width: 200%;
+  width: max-content;
   z-index: 100;
   overflow-x: hidden;
 }

@@ -1,49 +1,64 @@
 <script setup lang="ts">
-import clsx from 'clsx';
-import { ChevronDown, ChevronUp } from 'lucide-vue-next';
-import { ref } from 'vue';
+import { computed } from "vue";
+import clsx from "clsx";
+import { ChevronDown, ChevronUp } from "lucide-vue-next";
+import { useSelect } from "./useSelect";
+import type { Item } from "./types/item.types";
 
 interface Props {
-    class?: string;
+	class?: string;
+	items?: Item[];
 }
-const props = defineProps<Props>()
-const isOpenSelect = ref(false)
+const props = defineProps<Props>();
 
-const onToggleSelect = () => {
-  isOpenSelect.value = !isOpenSelect.value
-}
+const { isOpenSelect, toggle, selectedValue } = useSelect();
 
+const selectedLabel = computed(() => {
+	const found = props.items?.find((i) => i.id === selectedValue.value);
+	return found?.label ?? "Выберите значение";
+});
 </script>
 
 <template>
-    <button :class="clsx('select-button', props.class)" @click="onToggleSelect">
-      <span class="select-title">Обычный текст</span>
-      <component :is="!isOpenSelect ? ChevronDown : ChevronUp" :size="18"></component>
-    </button>
+	<button
+		type="button"
+		:class="clsx('select-button', props.class)"
+		@click="toggle"
+	>
+		<span class="select-title">{{ selectedLabel }}</span>
+		<component
+			class="select-icon"
+			:is="!isOpenSelect ? ChevronDown : ChevronUp"
+			:size="18"
+		></component>
+	</button>
 </template>
 
 <style scoped>
-
 .select-button {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 2px;
-  padding: 1px 10px;
-  cursor: pointer;
-  border-radius: var(--border-radius);
-  max-width: 120px;
-  font-size: 14px;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 2px;
+	padding: 1px 10px;
+	cursor: pointer;
+	border-radius: var(--border-radius);
+	width: 120px;
+	font-size: 14px;
 }
 
 .select-button:hover {
-  background-color: var(--hover-color);
+	background-color: var(--hover-color);
+}
+
+.select-button > .select-icon {
+	pointer-events: none;
 }
 
 .select-title {
-  max-width: 100px;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  overflow: hidden;
+	max-width: 100px;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	overflow: hidden;
 }
 </style>

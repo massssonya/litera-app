@@ -4,10 +4,12 @@ import clsx from "clsx";
 import { ChevronDown, ChevronUp } from "lucide-vue-next";
 import { useSelect } from "./useSelect";
 import type { Item } from "./types/item.types";
+import { Button } from "../button";
 
 interface Props {
 	class?: string;
 	items?: Item[];
+	promt?: string;
 }
 const props = defineProps<Props>();
 
@@ -20,10 +22,10 @@ const selectedLabel = computed(() => {
 </script>
 
 <template>
-	<button
-		type="button"
+	<Button
 		:class="clsx('select-button', props.class)"
 		@click="toggle"
+		:promt="props.promt"
 	>
 		<span class="select-title">{{ selectedLabel }}</span>
 		<component
@@ -31,7 +33,7 @@ const selectedLabel = computed(() => {
 			:is="!isOpenSelect ? ChevronDown : ChevronUp"
 			:size="18"
 		></component>
-	</button>
+	</Button>
 </template>
 
 <style scoped>

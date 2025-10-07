@@ -28,5 +28,6 @@ const props = defineProps<Props>()
     background-color: var(--promt-color);
     border-radius: var(--border-radius);
     opacity:0;
+	z-index: 100;
 }
 </style>

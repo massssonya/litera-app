@@ -5,14 +5,13 @@ import SelectTextStyle from "./SelectTextStyle.vue";
 import TextPromt from "../ui/text-promt/TextPromt.vue";
 import clsx from "clsx";
 import TextColorButton from "./TextColorButton.vue";
+import { Button } from "../ui/button";
 
 interface Props {
 	editor: Editor;
 }
 
 defineProps<Props>();
-
-
 </script>
 
 <template>
@@ -21,7 +20,7 @@ defineProps<Props>();
 			<SelectTextStyle :editor="editor"></SelectTextStyle>
 		</div>
 		<div class="toolbar-group">
-			<button v-for="btn in configToolbar.buttons" :key="btn.label" @click="btn.action(editor)" :name="btn.label"
+			<!-- <button v-for="btn in configToolbar.buttons" :key="btn.label" @click="btn.action(editor)" :name="btn.label"
 				:disabled="btn.can ? !btn.can(editor) : !editor"
 				:class="clsx('button', { 'is-active': btn.isActive && btn.isActive(editor) })">
 				<component v-show="btn.icon" :is="btn.icon" />
@@ -29,10 +28,19 @@ defineProps<Props>();
 				<TextPromt v-show="!!btn.promt">
 					{{ btn.promt }}
 				</TextPromt>
-			</button>
-			<TextColorButton :editor="editor">
-
-			</TextColorButton>
+			</button> -->
+			<Button
+				v-for="btn in configToolbar.buttons"
+				:key="btn.label"
+				@click="btn.action(editor)"
+				:name="btn.label"
+				:disabled="btn.can ? !btn.can(editor) : !editor"
+				:class="clsx('button', { 'is-active': btn.isActive && btn.isActive(editor) })"
+				:promt="btn.promt"
+				><component v-show="btn.icon" :is="btn.icon" />
+				{{ !btn.icon ? btn.label : "" }}
+			</Button>
+			<TextColorButton :editor="editor"> </TextColorButton>
 		</div>
 	</div>
 </template>
@@ -53,14 +61,11 @@ defineProps<Props>();
 	margin-right: 5px;
 }
 
-
-
 .button {
 	position: relative;
 }
 
-.button:hover>.promt {
-	opacity: 1
+.button:hover > .promt {
+	opacity: 1;
 }
-
 </style>

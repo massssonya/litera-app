@@ -1,6 +1,7 @@
 <script setup lang="ts">
 
 
+
 interface Props {
     class?: String;
     onClick?: void;
@@ -15,6 +16,7 @@ defineProps<Props>()
     <button :class="class" @click="onClick!" @keyup.ctrl.b="onKeyUp!">
         <slot />
     </button>
+
 </template>
 
 

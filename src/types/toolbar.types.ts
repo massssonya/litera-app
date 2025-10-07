@@ -5,6 +5,7 @@ export interface BaseEditorButton {
 	action: (editor: Editor, style?: Record<string, any>) => void;
 	isActive?: (editor: Editor) => boolean;
 	can?: (editor: Editor) => boolean;
+	promt?: string;
 }
 
 export interface ToolbarButton extends BaseEditorButton {

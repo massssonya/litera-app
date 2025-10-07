@@ -2,9 +2,13 @@
   --toolbar-bg-color: #f5f4f4;
   --border-color: #bebebe;
   --hover-color: rgb(216, 216, 216);
+  --promt-color: #110425;
 
   --border-radius: 5px;
   --bg-secondary: #ffffff;
+
+  --box-shadow: 5px 5px 10px 2px rgba(0, 0, 0, 0.3);
+  --box-shadow-sm: 0px 0px 5px 2px rgba(0, 0, 0, 0.3);
 }
 
 html, body {
@@ -34,4 +38,9 @@ select {
 
 select::content{
   background-color: wheat;
+}
+
+button:hover,
+select:hover {
+	background-color: var(--hover-color);
 }

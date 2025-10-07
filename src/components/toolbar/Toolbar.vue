@@ -2,12 +2,17 @@
 import type { Editor } from "@tiptap/vue-3";
 import { configToolbar } from "../../config/toolbar.config";
 import SelectTextStyle from "./SelectTextStyle.vue";
+import TextPromt from "../ui/text-promt/TextPromt.vue";
+import clsx from "clsx";
+import TextColorButton from "./TextColorButton.vue";
 
 interface Props {
 	editor: Editor;
 }
 
 defineProps<Props>();
+
+
 </script>
 
 <template>
@@ -16,17 +21,18 @@ defineProps<Props>();
 			<SelectTextStyle :editor="editor"></SelectTextStyle>
 		</div>
 		<div class="toolbar-group">
-			<button
-				v-for="btn in configToolbar.buttons"
-				:key="btn.label"
-				@click="btn.action(editor)"
-				:name="btn.label"
+			<button v-for="btn in configToolbar.buttons" :key="btn.label" @click="btn.action(editor)" :name="btn.label"
 				:disabled="btn.can ? !btn.can(editor) : !editor"
-				:class="{ 'is-active': btn.isActive && btn.isActive(editor) }"
-			>
+				:class="clsx('button', { 'is-active': btn.isActive && btn.isActive(editor) })">
 				<component v-show="btn.icon" :is="btn.icon" />
 				{{ !btn.icon ? btn.label : "" }}
+				<TextPromt v-show="!!btn.promt">
+					{{ btn.promt }}
+				</TextPromt>
 			</button>
+			<TextColorButton :editor="editor">
+
+			</TextColorButton>
 		</div>
 	</div>
 </template>
@@ -47,8 +53,14 @@ defineProps<Props>();
 	margin-right: 5px;
 }
 
-.toolbar button:hover,
-select:hover {
-	background-color: var(--hover-color);
+
+
+.button {
+	position: relative;
 }
+
+.button:hover>.promt {
+	opacity: 1
+}
+
 </style>

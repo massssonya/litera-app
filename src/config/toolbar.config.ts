@@ -8,21 +8,24 @@ export const configToolbar: ConfigToolbar = {
 			icon: Bold,
 			action: (e) => e.chain().focus().toggleBold().run(),
 			isActive: (e) => e.isActive("bold"),
-			can: (e) => e.can().chain().focus().toggleBold().run()
+			can: (e) => e.can().chain().focus().toggleBold().run(),
+			promt: "Полужирный (Ctrl + B)"
 		},
 		{
 			label: "Italic",
 			icon: Italic,
 			action: (e) => e.chain().focus().toggleItalic().run(),
 			isActive: (e) => e.isActive("italic"),
-			can: (e) => e.can().chain().focus().toggleItalic().run()
+			can: (e) => e.can().chain().focus().toggleItalic().run(),
+			promt: "Курсив (Ctrl + I)"
 		},
 		{
 			label: "Strike",
 			icon: Strikethrough,
 			action: (e) => e.chain().focus().toggleStrike().run(),
 			isActive: (e) => e.isActive("strike"),
-			can: (e) => e.can().chain().focus().toggleStrike().run()
+			can: (e) => e.can().chain().focus().toggleStrike().run(),
+			promt: "Подчёркнутый (Ctrl + U)"
 		}
 	],
 	textStyles: [

@@ -1,22 +1,20 @@
 <script setup lang="ts">
-import { Baseline } from "lucide-vue-next";
-import { colorsConfig } from "../../config/colors.config";
-import type { Editor } from "@tiptap/vue-3";
-import { Button } from "../ui/button";
-import { useDisclosure } from "../../composable";
-import { useColor } from "../../composable";
-
+import type { Editor } from '@tiptap/vue-3';
+import { Button } from '../ui/button';
+import { useColor, useDisclosure } from '../../composable';
+import { Highlighter } from 'lucide-vue-next';
+import { colorsConfig } from '../../config/colors.config';
 interface Props {
 	editor: Editor;
 }
 
 const props = defineProps<Props>();
 
-const { isOpen, contentRef, close, toggle } = useDisclosure();
-const { currentColor, hoveredColor, paletteColors, selectColor: selectTextColor, handleMouseEnter, handleMouseLeave } = useColor({
+const { contentRef, toggle, isOpen } = useDisclosure();
+const { currentColor, hoveredColor, paletteColors, selectColor: selectTextBackgroundColor, handleMouseEnter, handleMouseLeave } = useColor({
 	colors: colorsConfig.palette,
 	onSelectColor: (color) => {
-		props.editor.chain().focus().setColor(color).run();
+		props.editor.chain().focus().setHighlight({ color }).run();
 		close();
 	}
 })
@@ -25,15 +23,16 @@ const { currentColor, hoveredColor, paletteColors, selectColor: selectTextColor,
 
 <template>
 	<div ref="contentRef" class="wrapper">
-		<Button @click="toggle" :promt="'Цвет текста'">
-			<Baseline :color="currentColor" />
+		<Button @click="toggle" :promt="'Цвет фона текста'">
+			<Highlighter :color="currentColor" />
 		</Button>
 		<div class="content" v-show="isOpen">
 			<div class="content-container">
 				<button v-for="(btn, index) in paletteColors" :key="btn + index" class="btn-color" :style="{
 					backgroundColor: btn,
 					boxShadow: hoveredColor === btn ? `0px 0px 5px 2px ${btn}` : 'none'
-				}" @mouseenter="handleMouseEnter(btn)" @mouseleave="handleMouseLeave" @click="selectTextColor(btn)"></button>
+				}" @mouseenter="handleMouseEnter(btn)" @mouseleave="handleMouseLeave"
+					@click="selectTextBackgroundColor(btn)"></button>
 			</div>
 		</div>
 	</div>

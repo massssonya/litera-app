@@ -1,11 +1,9 @@
 <script setup lang="ts">
 import type { Editor } from "@tiptap/vue-3";
-import { configToolbar } from "../../config/toolbar.config";
 import SelectTextStyle from "./SelectTextStyle.vue";
-import TextPromt from "../ui/text-promt/TextPromt.vue";
-import clsx from "clsx";
 import TextColorButton from "./TextColorButton.vue";
-import { Button } from "../ui/button";
+import FormatTextButtonGroup from "./FormatTextButtonGroup.vue";
+import TextBackgroundColorButton from "./TextBackgroundColorButton.vue";
 
 interface Props {
 	editor: Editor;
@@ -20,27 +18,9 @@ defineProps<Props>();
 			<SelectTextStyle :editor="editor"></SelectTextStyle>
 		</div>
 		<div class="toolbar-group">
-			<!-- <button v-for="btn in configToolbar.buttons" :key="btn.label" @click="btn.action(editor)" :name="btn.label"
-				:disabled="btn.can ? !btn.can(editor) : !editor"
-				:class="clsx('button', { 'is-active': btn.isActive && btn.isActive(editor) })">
-				<component v-show="btn.icon" :is="btn.icon" />
-				{{ !btn.icon ? btn.label : "" }}
-				<TextPromt v-show="!!btn.promt">
-					{{ btn.promt }}
-				</TextPromt>
-			</button> -->
-			<Button
-				v-for="btn in configToolbar.buttons"
-				:key="btn.label"
-				@click="btn.action(editor)"
-				:name="btn.label"
-				:disabled="btn.can ? !btn.can(editor) : !editor"
-				:class="clsx('button', { 'is-active': btn.isActive && btn.isActive(editor) })"
-				:promt="btn.promt"
-				><component v-show="btn.icon" :is="btn.icon" />
-				{{ !btn.icon ? btn.label : "" }}
-			</Button>
-			<TextColorButton :editor="editor"> </TextColorButton>
+			<FormatTextButtonGroup :editor="editor"></FormatTextButtonGroup>
+			<TextColorButton :editor="editor"></TextColorButton>
+			<TextBackgroundColorButton :editor="editor"></TextBackgroundColorButton>
 		</div>
 	</div>
 </template>
@@ -61,11 +41,5 @@ defineProps<Props>();
 	margin-right: 5px;
 }
 
-.button {
-	position: relative;
-}
 
-.button:hover > .promt {
-	opacity: 1;
-}
 </style>

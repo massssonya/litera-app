@@ -4,6 +4,7 @@ import SelectTextStyle from "./SelectTextStyle.vue";
 import TextColorButton from "./TextColorButton.vue";
 import FormatTextButtonGroup from "./FormatTextButtonGroup.vue";
 import TextBackgroundColorButton from "./TextBackgroundColorButton.vue";
+import BasicButtonGroup from "./BasicButtonGroup.vue";
 
 interface Props {
 	editor: Editor;
@@ -14,6 +15,9 @@ defineProps<Props>();
 
 <template>
 	<div class="toolbar">
+		<div class="toolbar-group">
+			<BasicButtonGroup :editor="editor"></BasicButtonGroup>
+		</div>
 		<div class="toolbar-group">
 			<SelectTextStyle :editor="editor"></SelectTextStyle>
 		</div>

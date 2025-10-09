@@ -4,7 +4,6 @@ import TextPromt from "../text-promt/TextPromt.vue";
 
 interface Props {
 	label?: string;
-	icon?: any;
 	class?: string;
 	promt?: string;
 	onClick: () => void;

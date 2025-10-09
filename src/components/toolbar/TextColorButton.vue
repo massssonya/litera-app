@@ -12,6 +12,7 @@ interface Props {
 
 const props = defineProps<Props>();
 
+
 const { isOpen, contentRef, close, toggle } = useDisclosure();
 const { currentColor, hoveredColor, paletteColors, selectColor: selectTextColor, handleMouseEnter, handleMouseLeave } = useColor({
 	colors: colorsConfig.palette,

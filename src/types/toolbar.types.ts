@@ -19,6 +19,7 @@ export interface TextStyles extends BaseEditorButton {
 }
 
 export interface ConfigToolbar {
+	basics: ToolbarButton[];
 	buttons: ToolbarButton[];
 	textStyles: TextStyles[];
 }

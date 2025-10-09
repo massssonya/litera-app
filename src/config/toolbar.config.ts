@@ -1,7 +1,23 @@
-import { Bold, Italic, Strikethrough } from "lucide-vue-next";
+import { Bold, Italic, Redo2, Strikethrough, Underline, Undo2 } from "lucide-vue-next";
 import type { ConfigToolbar } from "../types/toolbar.types";
 
 export const configToolbar: ConfigToolbar = {
+	basics: [
+		{
+			label: "Undo",
+			icon: Undo2,
+			action: (e) => e.chain().focus().undo().run(),
+			can: (e) => e.can().chain().focus().undo().run(),
+			promt: "Отменить (Ctrl + Z)"
+		},
+		{
+			label: "Redo",
+			icon: Redo2,
+			action: (e) => e.chain().focus().redo().run(),
+			can: (e) => e.can().chain().focus().redo().run(),
+			promt: "Повторить (Ctrl + Y)"
+		}
+	],
 	buttons: [
 		{
 			label: "Bold",
@@ -17,6 +33,14 @@ export const configToolbar: ConfigToolbar = {
 			action: (e) => e.chain().focus().toggleItalic().run(),
 			isActive: (e) => e.isActive("italic"),
 			can: (e) => e.can().chain().focus().toggleItalic().run(),
+			promt: "Курсив (Ctrl + I)"
+		},
+		{
+			label: "Underline",
+			icon: Underline,
+			action: (e) => e.chain().focus().toggleUnderline().run(),
+			isActive: (e) => e.isActive('underline'),
+			can: (e) => e.can().chain().focus().toggleUnderline().run(),
 			promt: "Курсив (Ctrl + I)"
 		},
 		{

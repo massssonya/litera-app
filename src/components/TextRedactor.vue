@@ -5,6 +5,7 @@ import StarterKit from "@tiptap/starter-kit";
 import { Editor, EditorContent } from "@tiptap/vue-3";
 import Toolbar from "./toolbar/Toolbar.vue";
 import { onBeforeUnmount, onMounted, shallowRef } from "vue";
+import { NavigationMenu } from "./nav-menu";
 
 const editor = shallowRef<Editor | null>(null)
 
@@ -58,7 +59,11 @@ onBeforeUnmount(() => {
 
 <template>
     <div v-if="editor" class="container tiptap">
-        <Toolbar :editor="editor" />
+        <nav class="nav">
+            <NavigationMenu />
+            <Toolbar :editor="editor" />
+        </nav>
+
         <!-- <div class="control-group">
             <div class="button-group">
                 <button @click="editor.chain().focus().toggleCode().run()"
@@ -191,5 +196,15 @@ onBeforeUnmount(() => {
         border-top: 1px solid var(--gray-2);
         margin: 2rem 0;
     }
+
+    box-sizing: border-box;
+
+    .nav {
+        
+        border: 1px solid black;
+        margin: 0px auto;
+        padding: 0 20px;
+    }
+
 }
 </style>

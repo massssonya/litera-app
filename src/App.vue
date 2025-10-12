@@ -12,7 +12,7 @@ import TextRedactor from './components/TextRedactor.vue';
 
 <style scoped>
 .container {
-  width: 100%;
+  max-width: 1440px;
   height: 100%;
   margin: 0 auto;
 }

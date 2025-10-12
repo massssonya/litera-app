@@ -34,7 +34,7 @@ defineProps<Props>();
 	display: flex;
 	gap: 0;
 	background-color: var(--toolbar-bg-color);
-	padding: 5px 0;
+	padding: 5px;
 	border-radius: 20px;
 }
 
